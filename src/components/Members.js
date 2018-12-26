@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-import ReactTable from 'react-table';
 
 import Card from './common/Card';
 
@@ -69,6 +68,7 @@ const Members = ({
 );
 
 Members.propTypes = {
+  auth: PropTypes.object.isRequired,
   crossMatchTraitId: PropTypes.number,  
   members: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
