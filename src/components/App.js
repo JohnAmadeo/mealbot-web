@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Auth from '../auth/auth';
+import DashboardContainer from '../containers/DashboardContainer';
 import MembersContainer from '../containers/MembersContainer';
 import Landing from './Landing';
 import Callback from './Callback';
@@ -20,7 +21,11 @@ class App extends Component {
             exact
             // TODO: Wrap MembersContainer in Dashboard component
             // encapsulates left nav & error list 
-            render={props => <MembersContainer auth={auth}/>} 
+            render={props => 
+              <DashboardContainer auth={auth}>
+                {/* <MembersContainer auth={auth}/> */}
+              </DashboardContainer> 
+            } 
             />
           {/* <Route path="/pairing" exact component={"Pairing"} /> */}
           <Route 

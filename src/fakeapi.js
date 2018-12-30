@@ -16,6 +16,14 @@ export function fetchMembers(csv) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({ members, traits });
-    }, 2000);
+    }, 1000);
   });
 };
+
+export function fakeFetch(response) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(response);
+    }, 1000);
+  });
+}

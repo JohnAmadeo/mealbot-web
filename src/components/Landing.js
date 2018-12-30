@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 class Landing extends React.Component {
   componentDidMount() {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
+    if (this.props.auth.isAuthenticated()) {
       this.props.auth.renewSession();
     }
   }

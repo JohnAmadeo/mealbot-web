@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { uploadMembers } from '../actions/members';
+import { uploadMembers, setCrossMatchTrait } from '../actions/members';
 import Members from '../components/Members';
 
 const mapStateToProps = state => ({ 
@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onUploadMembersCSV: uploadMembers,
+  setCrossMatchTrait,
 };
 
 const MembersContainer = connect(

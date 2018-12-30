@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reach/menu-button": "^0.1.7",
     "auth0-js": "^9.8.2",
+    "axios": "^0.18.0",
     "history": "^4.7.2",
+    "jwt-decode": "^2.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

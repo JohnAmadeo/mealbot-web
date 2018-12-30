@@ -8,6 +8,7 @@ const Members = ({
   crossMatchTraitId,
   members, 
   onUploadMembersCSV,
+  setCrossMatchTrait,
   traits, 
 }) => (
   <>
@@ -75,6 +76,7 @@ Members.propTypes = {
     email: PropTypes.string,
   })).isRequired,
   onUploadMembersCSV: PropTypes.func.isRequired,
+  setCrossMatchTrait: PropTypes.func.isRequired,
   traits: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

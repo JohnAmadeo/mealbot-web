@@ -1,4 +1,4 @@
-import { fetchMembers } from '../fakeapi';
+import { fakeFetch } from '../fakeapi';
 import { ADD_ERROR } from './errors';
 
 /*
@@ -15,7 +15,7 @@ export const SET_CROSS_MATCH_TRAIT = 'SET_CROSS_MATCH_TRAIT';
 
 export function uploadMembers(csv) {
   return dispatch => {
-    return fetchMembers(csv)
+    return fakeFetch(csv)
       // TODO: add '.then(resp => resp.json())'
       .then(result => dispatch({ 
           type: SET_MEMBERS, 
