@@ -15,7 +15,7 @@ const mapDispatchToProps = {
   selectOrg,
 };
 
-const DashboardAdapter = ({ 
+let DashboardContainer = ({ 
   createOrg,
   fetchOrgs,
   selectOrg,
@@ -29,9 +29,9 @@ const DashboardAdapter = ({
     />
 );
 
-const DashboardContainer = connect(
+DashboardContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(DashboardAdapter);
+)(DashboardContainer);
 
 export default DashboardContainer;

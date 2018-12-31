@@ -42,7 +42,10 @@ class Dashboard extends React.Component {
             onChange={event => this.setState({ newOrg: event.target.value })}
             />
           <button
-            onClick={_ => this.props.createOrg(this.state.newOrg)}
+            onClick={_ => {
+              this.props.createOrg(this.state.newOrg);
+              this.setState({ newOrg: '' })
+            }}
             >
             + (Replace with icon)
           </button>

@@ -15,7 +15,13 @@ const Members = ({
     <ul>
         {traits.map((trait, idx) => 
           // Turn into a styled.li component later
-          <li key={idx}>
+          <li 
+            key={idx} 
+            value={trait}
+            onClick={e => 
+              setCrossMatchTrait(e.target.getAttribute('value'))
+            }
+            >
             {crossMatchTraitId === idx ? `SELECTED ${trait}` : trait}
           </li>
         )}
@@ -25,6 +31,8 @@ const Members = ({
     <table>
       <thead>
         <tr>
+          <th>name</th>
+          <th>email</th>
           {traits.map(trait =>
             <th key={trait}>{trait}</th>
           )}
@@ -33,6 +41,12 @@ const Members = ({
       <tbody>
         {members.map(member =>
           <tr key={member.name}>
+            <td key={`${member.name}-name`}>
+              {member.name}
+            </td>
+            <td key={`${member.name}-email`}>
+              {member.email}
+            </td>
             {traits.map(trait => 
               <td key={`${member.name}-${trait}`}>
                 {member[trait]}
@@ -63,7 +77,7 @@ const Members = ({
     </Dropzone>
 
     <Card>
-        <a href="http://localhost:8080/samplecsv" download>Download a sample CSV file that Mealbot finds valid</a>
+        <a href="http://localhost:8080/sample.csv" download>Download a sample CSV file that Mealbot finds valid</a>
     </Card>
   </>
 );

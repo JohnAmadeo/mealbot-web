@@ -23,7 +23,7 @@ class App extends Component {
             // encapsulates left nav & error list 
             render={props => 
               <DashboardContainer auth={auth}>
-                {/* <MembersContainer auth={auth}/> */}
+                <MembersContainer auth={auth}/>
               </DashboardContainer> 
             } 
             />

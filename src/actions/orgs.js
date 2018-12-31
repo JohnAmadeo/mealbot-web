@@ -76,13 +76,13 @@ export function selectOrg(auth, org) {
 
     return axios.get(url('org'), config)
       .then(result => {
-        const { members, traits, crossMatchTraitId } = result.data;
+        const { members, traits, crossMatchTrait } = result.data;
         dispatch({
           type: SELECT_ORG,
           org,
           members,
           traits,
-          crossMatchTraitId,
+          crossMatchTrait,
         });
       });
   }
