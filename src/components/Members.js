@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import { Redirect } from 'react-router-dom';
 
 import Card from './common/Card';
 
 const Members = ({ 
+  auth,
   crossMatchTraitId,
   members, 
   onUploadMembersCSV,
   setCrossMatchTrait,
   traits, 
-}) => (
+}) => auth.isAuthenticated() ? (
   <>
     <ul>
         {traits.map((trait, idx) => 
@@ -80,6 +82,8 @@ const Members = ({
         <a href="http://localhost:8080/sample.csv" download>Download a sample CSV file that Mealbot finds valid</a>
     </Card>
   </>
+) : (
+  <Redirect to='/' />
 );
 
 Members.propTypes = {

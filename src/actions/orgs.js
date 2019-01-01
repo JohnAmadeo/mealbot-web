@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { fakeFetch } from '../fakeapi';
 import { ADD_ERROR } from './errors';
 
 import { apiConfig, url } from '../api';

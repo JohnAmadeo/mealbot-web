@@ -2,11 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-/*
- * <Dropdown> to select orgs / create new one
- * <Link>s to navigate to different pages
- */
-
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);

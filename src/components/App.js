@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Auth from '../auth/auth';
 import DashboardContainer from '../containers/DashboardContainer';
 import MembersContainer from '../containers/MembersContainer';
+import PairingContainer from '../containers/PairingContainer';
 import Landing from './Landing';
 import Callback from './Callback';
 
@@ -27,7 +28,14 @@ class App extends Component {
               </DashboardContainer> 
             } 
             />
-          {/* <Route path="/pairing" exact component={"Pairing"} /> */}
+          <Route 
+            path="/pairing" 
+            exact 
+            render={props =>
+              <DashboardContainer auth={auth}>
+                <PairingContainer auth={auth} />
+              </DashboardContainer> 
+            } />
           <Route 
             path="/callback" 
             exact
