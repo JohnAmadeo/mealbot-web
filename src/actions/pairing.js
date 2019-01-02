@@ -124,8 +124,7 @@ export function fetchPairs(auth, org) {
       org,
     };
 
-    // return axios.get(url('pairs'), config)
-    return faxios.get({ data: { roundPairs: fpairs } })
+    return axios.get(url('pairs'), config)
       .then(result => {
         console.log(result);
         const roundPairs = result.data.roundPairs;
