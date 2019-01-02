@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     if (this.props.orgs.length === 0) {
-      this.props.fetchOrgs(this.props.auth);
+      this.props.fetchDashboardData(this.props.auth);
     } 
   }
 
@@ -59,7 +59,7 @@ class Dashboard extends React.Component {
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   createOrg: PropTypes.func.isRequired,
-  fetchOrgs: PropTypes.func.isRequired,
+  fetchDashboardData: PropTypes.func.isRequired,
   orgs: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectOrg: PropTypes.func.isRequired,
   selectedOrgId: PropTypes.number,

@@ -48,6 +48,12 @@ const frounds = [
     // moment().add(25, 'days'),
 ];
 
+function toUTCDateString(date) {
+  const d = date.clone();
+  d.utc();
+  return d.format();
+}
+
 /*
  * action types
  */
@@ -61,14 +67,15 @@ export const SET_ROUND_FOCUS = 'SET_ROUND_FOCUS';
 
 export function addRound(auth, org, round) {
   return dispatch => {
+    console.log(round.format());
     let config = apiConfig(auth);
     config.params = {
       ...config.params,
       org,
-      round,
+      round: toUTCDateString(round),
     };
-    // return axios.post(url('round'), {}, config)
-    return faxios.post()
+    return axios.post(url('round'), {}, config)
+    // return faxios.post()
       .then(result => l(dispatch({
         type: ADD_ROUND,
         round,
@@ -88,8 +95,8 @@ export function changeRoundDate(auth, org, roundId, round) {
       roundId,
       round,
     };
-    // return axios.post(url('round'), {}, config)
-    return faxios.post()
+    return axios.post(url('round'), {}, config)
+    // return faxios.post()
       .then(result => l(dispatch({
         type: CHANGE_ROUND_DATE,
         roundId,
@@ -127,17 +134,20 @@ export function fetchPairs(auth, org, roundId) {
 export function fetchRounds(auth, org) {
   return dispatch => {
     let config = apiConfig(auth);
+    console.log(org);
     config.params = {
       ...config.params,
       org,
     };
 
-    // return axios.get(url('rounds'), config)
-    return faxios.get({ data: { rounds: frounds }})
-      .then(result => l(dispatch({
-        type: SET_ROUNDS,
-        rounds: result.data.rounds, 
-      })))
+    return axios.get(url('rounds'), config)
+      .then(result => {
+        console.log(result.data);
+        l(dispatch({
+          type: SET_ROUNDS,
+          rounds: result.data.rounds.map(round => moment(round)), 
+        }));
+      })
       .catch(err => dispatch({
         type: ADD_ERROR,
         error: 'Failed to fetch rounds',
@@ -152,8 +162,11 @@ export function removeRound(auth, org, roundId) {
       org,
       roundId,
     };
-    // return axios.delete(url('round'), {}, config)
-    return faxios.delete()
+
+    console.log(config);
+
+    return axios.delete(url('round'), config)
+    // return faxios.delete()
       .then(result => l(dispatch({
         type: REMOVE_ROUND,
         roundId,

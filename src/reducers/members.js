@@ -21,7 +21,7 @@ export default function members(state = initialState, action) {
         ...state,
         members: action.members,
         traits: action.traits,
-        crossMatchTraitId: action.traits.length > 0 ? 0 : null,
+        crossMatchTraitId: action.crossMatchTraitId,
       };
     case SELECT_ORG:
       return {

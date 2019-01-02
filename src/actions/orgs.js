@@ -2,6 +2,8 @@ import axios from 'axios';
 import { ADD_ERROR } from './errors';
 
 import { apiConfig, url } from '../api';
+import { fetchRounds } from './pairing';
+import { fetchMembers } from './members';
 
 /*
  * action types
@@ -15,6 +17,24 @@ export const SELECT_ORG = 'SELECT_ORG';
  * action creators
  */
 
+export function fetchDashboardData(auth) {
+  return (dispatch, getState) => {
+    return dispatch(fetchOrgs(auth))
+      .then(() => {
+        const org = getState().orgs.org[getState().orgs.selectedOrgId];
+        return dispatch(fetchMembers(auth, org));
+      })
+      .then(() => {
+        const org = getState().orgs.org[getState().orgs.selectedOrgId];
+        return dispatch(fetchRounds(auth, org));
+      })
+      .catch(err => dispatch({
+        type: ADD_ERROR,
+        error: err,
+      }))
+  }
+}
+
 export function fetchOrgs(auth) {
   return dispatch => {
     return axios.get(url('orgs'), apiConfig(auth))
@@ -25,22 +45,11 @@ export function fetchOrgs(auth) {
         });
 
         if (result.data.orgs.length > 0) {
-          const config = apiConfig(auth);
           const org = result.data.orgs[0];
-          config.params.org = org;
-
-          axios.get(url('org'), config)
-            .then(result => {
-              console.log(result);
-              const { members, traits, crossMatchTraitId } = result.data;
-              dispatch({
-                type: SELECT_ORG,
-                org,
-                members,
-                traits,
-                crossMatchTraitId,
-              });
-            });
+          dispatch({
+            type: SELECT_ORG,
+            org,
+          });
         }
         return null;
       })

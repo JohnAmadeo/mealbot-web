@@ -11,16 +11,9 @@ class Pairing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      focused: this.props.rounds.map(_ => false),
       newRound: null,
       newRoundFocused: false,
     };
-  }
-
-  componentDidMount() {
-    if (this.props.rounds.length === 0) {
-      this.props.fetchRounds();
-    }
   }
 
   isRoundOutsideRange = (day, roundId) => {
@@ -138,7 +131,6 @@ Pairing.propTypes = {
   auth: PropTypes.object.isRequired,
   changeRoundDate: PropTypes.func.isRequired,
   fetchPairs: PropTypes.func.isRequired,
-  fetchRounds: PropTypes.func.isRequired,
   pairs: PropTypes.arrayOf(PropTypes.shape({
     member1: PropTypes.shape({
       name: PropTypes.string.isRequired,

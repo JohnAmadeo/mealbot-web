@@ -6,7 +6,6 @@ import {
   addRound, 
   changeRoundDate, 
   fetchPairs,
-  fetchRounds,
   removeRound, 
   setRoundFocus,
 } from '../actions/pairing';
@@ -22,7 +21,6 @@ const mapDispatchToProps = {
   addRound,
   changeRoundDate,
   fetchPairs,
-  fetchRounds,
   removeRound,
   setRoundFocus,
 };
@@ -31,7 +29,6 @@ let PairingContainer = ({
   addRound,
   changeRoundDate,
   fetchPairs,
-  fetchRounds,
   removeRound,
   ...props,
 }) => (
@@ -44,7 +41,6 @@ let PairingContainer = ({
       fetchPairs={
         roundId => fetchPairs(props.auth, props.org, roundId)
       }
-      fetchRounds={() => fetchRounds(props.auth, props.org)}
       removeRound={
         roundId => removeRound(props.auth, props.org, roundId)
       }

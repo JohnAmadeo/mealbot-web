@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { createOrg, fetchOrgs, selectOrg } from '../actions/orgs';
+import { createOrg, selectOrg } from '../actions/orgs';
+import { fetchDashboardData } from '../actions/dashboard';
 import Dashboard from '../components/Dashboard';
 
 const mapStateToProps = state => ({
@@ -11,20 +12,20 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   createOrg,
-  fetchOrgs,
+  fetchDashboardData,
   selectOrg,
 };
 
 let DashboardContainer = ({ 
   createOrg,
-  fetchOrgs,
+  fetchDashboardData,
   selectOrg,
   ...props, 
 }) => (
   <Dashboard 
     {...props} 
     createOrg={name => createOrg(props.auth, name)}
-    fetchOrgs={() => fetchOrgs(props.auth)}
+    fetchDashboardData={() => fetchDashboardData(props.auth)}
     selectOrg={org => selectOrg(props.auth, org)}
     />
 );

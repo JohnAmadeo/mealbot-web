@@ -14,6 +14,24 @@ export const SET_CROSS_MATCH_TRAIT = 'SET_CROSS_MATCH_TRAIT';
  * action creators
  */
 
+export function fetchMembers(auth, org) {
+  return dispatch => {
+    const config = apiConfig(auth);
+    config.params.org = org;
+
+    return axios.get(url('members'), config)
+      .then(result => {
+        console.log(result);
+        const { members, traits, crossMatchTraitId } = result.data;
+        dispatch({
+          type: SET_MEMBERS,
+          members,
+          traits,
+          crossMatchTraitId,
+        });
+      });
+  };
+}
 export function uploadMembers(auth, org, csv) {
   return dispatch => {
     console.log(csv);
@@ -33,7 +51,8 @@ export function uploadMembers(auth, org, csv) {
         dispatch({ 
           type: SET_MEMBERS, 
           members: result.data.members, 
-          traits: result.data.traits, 
+          traits: result.data.traits,
+          crossMatchTraitId: null, 
         });
       })
       .catch(err => dispatch({
