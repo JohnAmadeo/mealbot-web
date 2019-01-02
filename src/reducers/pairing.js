@@ -1,8 +1,17 @@
-import { SET_PAIRS, SET_ROUNDS, ADD_ROUND, REMOVE_ROUND, CHANGE_ROUND_DATE, SET_ROUND_FOCUS } from "../actions/pairing";
+import { 
+  ADD_ROUND, 
+  CHANGE_ROUND_DATE, 
+  REMOVE_ROUND, 
+  SET_PAIRS, 
+  SET_ROUNDS, 
+  SET_ROUND_FOCUS,
+  SET_SELECTED_ROUND_PAIRS_ID
+} from "../actions/pairing";
 import { fn } from '../utils';
 
 const initialState = {
-  pairs: [],
+  roundPairs: [],
+  selectedRoundPairsId: null,
   rounds: [],
   isRoundFocused: [],
 };
@@ -29,7 +38,8 @@ export default function orgs(state = initialState, action) {
     case SET_PAIRS:
       return {
         ...state,
-        pairs: action.pairs,
+        roundPairs: action.roundPairs,
+        selectedRoundPairsId: action.selectedRoundPairsId,
       };
     case SET_ROUNDS:
       return {
@@ -45,6 +55,11 @@ export default function orgs(state = initialState, action) {
           action.isFocused,
           action.roundId,
         ),
+      }
+    case SET_SELECTED_ROUND_PAIRS_ID:
+      return {
+        ...state,
+        selectedRoundPairsId: action.roundPairsId,
       }
     default:
       return state;

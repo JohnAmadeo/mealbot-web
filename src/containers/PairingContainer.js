@@ -5,30 +5,30 @@ import Pairing from '../components/Pairing';
 import { 
   addRound, 
   changeRoundDate, 
-  fetchPairs,
   removeRound, 
   setRoundFocus,
+  setSelectedRoundPairsId,
 } from '../actions/pairing';
 
 const mapStateToProps = state => ({
   isRoundFocused: state.pairing.isRoundFocused,
   org: state.orgs.orgs[state.orgs.selectedOrgId],
-  pairs: state.pairing.pairs,
   rounds: state.pairing.rounds,
+  roundPairs: state.pairing.roundPairs,
+  selectedRoundPairsId: state.pairing.selectedRoundPairsId,
 });
 
 const mapDispatchToProps = {
   addRound,
   changeRoundDate,
-  fetchPairs,
   removeRound,
   setRoundFocus,
+  setSelectedRoundPairsId,
 };
 
 let PairingContainer = ({
   addRound,
   changeRoundDate,
-  fetchPairs,
   removeRound,
   ...props,
 }) => (
@@ -37,9 +37,6 @@ let PairingContainer = ({
       addRound={round => addRound(props.auth, props.org, round)}
       changeRoundDate={(roundId, round) =>
         changeRoundDate(props.auth, props.org, roundId, round)
-      }
-      fetchPairs={
-        roundId => fetchPairs(props.auth, props.org, roundId)
       }
       removeRound={
         roundId => removeRound(props.auth, props.org, roundId)

@@ -55,19 +55,32 @@ class Pairing extends React.Component {
 
   render() {
     const { 
-      pairs, 
-      rounds,
       changeRoundDate,
+      rounds,
+      roundPairs,
+      selectedRoundPairsId,
+      setSelectedRoundPairsId,
     } = this.props;
 
     const today = moment();
 
     return this.props.auth.isAuthenticated() ? (
       <>
-        {pairs.length > 0 &&
+        {roundPairs.map((_, idx) => 
+          <li 
+            key={idx}
+            value={idx}
+            onClick={e => 
+              setSelectedRoundPairsId(idx)
+            }>
+            {`${idx === selectedRoundPairsId ? 'SELECTED' : ''}-${idx}`}
+          </li>
+        )}
+
+        {selectedRoundPairsId !== null && 
           <table>
             <tbody>
-              {pairs.map((pair, idx) =>
+            {roundPairs[selectedRoundPairsId].map((pair, idx) =>
                 <tr key={idx}>
                   <td key={pair.member1.email}>
                     {pair.member1.name}
@@ -130,8 +143,9 @@ Pairing.propTypes = {
   addRound: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   changeRoundDate: PropTypes.func.isRequired,
-  fetchPairs: PropTypes.func.isRequired,
-  pairs: PropTypes.arrayOf(PropTypes.shape({
+  removeRound: PropTypes.func.isRequired,
+  rounds: PropTypes.arrayOf(PropTypes.object).isRequired,
+  roundPairs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
     member1: PropTypes.shape({
       name: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
@@ -140,10 +154,10 @@ Pairing.propTypes = {
       name: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
     }),
-  })).isRequired,
-  removeRound: PropTypes.func.isRequired,
-  rounds: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }))).isRequired,
+  selectedRoundPairsId: PropTypes.number,
   setRoundFocus: PropTypes.func.isRequired,
+  setSelectedRoundPairsId: PropTypes.func.isRequired,
 };
 
 export default Pairing;
