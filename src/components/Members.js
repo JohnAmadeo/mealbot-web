@@ -19,9 +19,8 @@ const Members = ({
           // Turn into a styled.li component later
           <li 
             key={idx} 
-            value={trait}
             onClick={e => 
-              setCrossMatchTrait(e.target.getAttribute('value'))
+              setCrossMatchTrait(trait)
             }
             >
             {crossMatchTraitId === idx ? `SELECTED ${trait}` : trait}

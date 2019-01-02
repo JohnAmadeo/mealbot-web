@@ -21,21 +21,19 @@ export function fetchMembers(auth, org) {
 
     return axios.get(url('members'), config)
       .then(result => {
-        console.log(result);
-        const { members, traits, crossMatchTraitId } = result.data;
+        const { members, traits, crossMatchTrait } = result.data;
+        console.log(result.data);
         dispatch({
           type: SET_MEMBERS,
           members,
           traits,
-          crossMatchTraitId,
+          crossMatchTraitId: traits.indexOf(crossMatchTrait),
         });
       });
   };
 }
 export function uploadMembers(auth, org, csv) {
   return dispatch => {
-    console.log(csv);
-
     let config = apiConfig(auth);
     config.params.org = org;
     // config.headers['Content-Type'] = 'multipart/form-data';
