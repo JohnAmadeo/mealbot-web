@@ -10,7 +10,8 @@ export function apiConfig(auth) {
 }
 
 export function url(route) {
-  const baseUrl = 'http://localhost:8080/';
+  // const baseUrl = 'http://localhost:8080/';
+  const baseUrl = 'https://mealbot-2.herokuapp.com/';
   return `${baseUrl}${route}`
 }
 

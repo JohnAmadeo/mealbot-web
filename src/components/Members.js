@@ -22,7 +22,7 @@ const Members = ({
     <MembersTable members={members} traits={traits}/>
     }
     <Card>
-      <a href="http://localhost:8080/sample.csv" download>Download a sample CSV file that Mealbot accepts</a>
+        <a href="https://mealbot-2.herokuapp.com/sample.csv" download>Download a sample CSV file that Mealbot accepts</a>
     </Card>
     <Dropzone
       accept="text/csv"
