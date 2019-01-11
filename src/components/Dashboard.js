@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import Select from 'react-select';
+import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+
+import Navbar from './Navbar';
+import OrganizationSelect from './OrganizationSelect';
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      newOrg: '',
-    };
+  state = {
+    loggedOut: false,
   }
 
   componentDidMount() {
@@ -17,41 +19,50 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { orgs, selectedOrgId } = this.props;
-    return (
-      <>
-        <div style={{ background: 'peachpuff' }}>
-          <select 
-            value={orgs[selectedOrgId]} 
-            onChange={event => this.props.selectOrg(event.target.value)}
-            >
-            {orgs.map((org, idx) => 
-              <option key={idx} value={org}>{org}</option>
-            )}
-          </select>
+    const { 
+      createOrg, 
+      orgs, 
+      routes, 
+      selectedOrgId, 
+      selectedRouteId 
+    } = this.props;
+    const options = orgs.map(org => ({ value: org, label: org }));
 
-          <p>Create new organization:</p>
-          <input 
-            type="text" 
-            value={this.state.newOrg}
-            onChange={event => this.setState({ newOrg: event.target.value })}
+    return !this.state.loggedOut ? (
+      <StyledDashboard>
+        <LeftPanel>
+          <LeftPanelContainer>
+            <Select
+              onChange={option => this.props.selectOrg(option.value)}
+              options={options}
+              value={options[selectedOrgId]}
             />
-          <button
-            onClick={_ => {
-              this.props.createOrg(this.state.newOrg);
-              this.setState({ newOrg: '' })
-            }}
-            >
-            + (Replace with icon)
-          </button>
 
-          <nav>
-            <Link to='/members'>Members</Link>
-            <Link to='/pairing'>Pairing</Link>
-          </nav>
-        </div>
-        {this.props.children}
-      </>
+            <OrganizationSelect
+              createOrg={createOrg}
+            />
+
+            <Navbar
+              routes={routes}
+              selectedRouteId={selectedRouteId}
+            />
+
+            <LogOutButton
+              onClick={() => {
+                this.setState({ loggedOut: true });
+                this.props.auth.logout();
+              }}
+              >
+              Log Out
+            </LogOutButton>
+          </LeftPanelContainer>
+        </LeftPanel>
+        <Tab>
+          {this.props.children}
+        </Tab>
+      </StyledDashboard>
+    ) : (
+      <Redirect to="/" />
     );
   }
 }
@@ -61,8 +72,59 @@ Dashboard.propTypes = {
   createOrg: PropTypes.func.isRequired,
   fetchDashboardData: PropTypes.func.isRequired,
   orgs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  routes: PropTypes.arrayOf(PropTypes.shape({
+    component: PropTypes.element,
+    path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  })).isRequired,
   selectOrg: PropTypes.func.isRequired,
   selectedOrgId: PropTypes.number,
+  selectedRouteId: PropTypes.number.isRequired,
 };
+
+const StyledDashboard = styled.div`
+  color: midnightblue;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+`;
+
+const LogOutButton = styled.button`
+  bottom: 0;  
+  position: absolute;
+
+  background: midnightblue;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  height: 38px;
+  width: 100%;
+
+  &:hover {
+    background: royalblue;
+    cursor: pointer;
+  }
+`;
+
+const LeftPanel = styled.div`
+  background: whitesmoke;
+  bottom: 0;
+  height: 100vh;
+  left:0;
+  padding: 24px;
+  position: fixed;
+  top: 0;
+  width: 240px;
+`;
+
+const LeftPanelContainer = styled.div`
+  height: 100%;
+  position: relative;
+`;
+
+const Tab = styled.div`
+  margin: 0 0 0 240px;
+  width: calc(100% - 240px);
+`;
 
 export default Dashboard;
