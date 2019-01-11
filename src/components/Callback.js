@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 
 const AUTH_STATE = {
   AUTHENTICATED: 'AUTHENTICATED',
@@ -34,7 +35,7 @@ class Callback extends React.Component {
   render() {
     switch (this.state.authState) {
       case AUTH_STATE.UNAUTHENTICATED:
-        return <>Loading...</>;
+        return <Loading>Loading...</Loading>;
       case AUTH_STATE.AUTHENTICATED:
         return <Redirect to='/' />;
       case AUTH_STATE.ERROR:
@@ -53,5 +54,9 @@ class Callback extends React.Component {
 Callback.propTypes = {
   auth: PropTypes.object.isRequired,
 };
+
+const Loading = styled.p`
+  text-align: center;
+`;
 
 export default Callback;
