@@ -10,3 +10,7 @@ export const fn = {
   ],
   push: (arr, item) => [...arr, item],
 }
+
+export const display = {
+  capitalize: str => str[0].toUpperCase() + str.slice(1)
+}
