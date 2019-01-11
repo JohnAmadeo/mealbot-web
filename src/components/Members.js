@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { Redirect } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
 import Card from './common/Card';
+import Header from './common/Header';
+import MembersTable from './MemberTable';
 
 const Members = ({ 
   auth,
@@ -13,74 +16,35 @@ const Members = ({
   setCrossMatchTrait,
   traits, 
 }) => auth.isAuthenticated() ? (
-  <>
-    <ul>
-        {traits.map((trait, idx) => 
-          // Turn into a styled.li component later
-          <li 
-            key={idx} 
-            onClick={e => 
-              setCrossMatchTrait(trait)
-            }
-            >
-            {crossMatchTraitId === idx ? `SELECTED ${trait}` : trait}
-          </li>
-        )}
-    </ul>
-
+  <StyledMembers>
+    <Header title={"Members"} />
     {members.length > 0 &&
-    <table>
-      <thead>
-        <tr>
-          <th>name</th>
-          <th>email</th>
-          {traits.map(trait =>
-            <th key={trait}>{trait}</th>
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {members.map(member =>
-          <tr key={member.name}>
-            <td key={`${member.name}-name`}>
-              {member.name}
-            </td>
-            <td key={`${member.name}-email`}>
-              {member.email}
-            </td>
-            {traits.map(trait => 
-              <td key={`${member.name}-${trait}`}>
-                {member[trait]}
-              </td>
-            )}
-          </tr>
-        )}
-      </tbody>
-    </table>
+    <MembersTable members={members} traits={traits}/>
     }
-
+    <Card>
+      <a href="http://localhost:8080/sample.csv" download>Download a sample CSV file that Mealbot accepts</a>
+    </Card>
     <Dropzone
       accept="text/csv"
       multiple={false}
       onDrop={(acceptedFiles, rejectedFiles) => {
-        if(acceptedFiles.length === 1) {
+        if (acceptedFiles.length === 1) {
           onUploadMembersCSV(acceptedFiles[0]);
         }
       }}
-      >
+    >
       {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <p>Upload a CSV file of your organization's members</p>
-            <p>The first line of the file will be interpreted as columns, and there must be a 'Name' column</p>
-          </div>
+        <DropArea
+          {...getRootProps()}
+          expanded={!(members.length > 0)}
+        >
+          <input {...getInputProps()} />
+          <p>Upload a CSV file of your organization's members</p>
+          <p>The first line of the file will be interpreted as columns, and there must be a 'Name' column</p>
+        </DropArea>
       )}
     </Dropzone>
-
-    <Card>
-        <a href="http://localhost:8080/sample.csv" download>Download a sample CSV file that Mealbot finds valid</a>
-    </Card>
-  </>
+  </StyledMembers>
 ) : (
   <Redirect to='/' />
 );
@@ -96,5 +60,26 @@ Members.propTypes = {
   setCrossMatchTrait: PropTypes.func.isRequired,
   traits: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
+
+const StyledMembers = styled.div`
+  color: darkslategray;
+  padding: 16px;
+
+  @media (min-width: 1024px) {
+    padding: 16px 120px 16px 120px;
+  }
+`;
+
+const DropArea = styled.div`
+  border: 1px dashed darkslategray;
+  cursor: pointer;
+  margin: 8px 0px;
+  padding: 4px;
+  text-align: center;
+
+  ${props => props.expanded && css`
+    padding: 72px 4px;
+  `}
+`;
 
 export default Members;
