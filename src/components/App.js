@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import Auth from '../auth/auth';
 import CrossMatchTraitContainer from '../containers/CrossMatchTraitContainer';
@@ -25,7 +25,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: lighter;
   }
 `;
-
 
 class App extends React.Component {
   render() {
@@ -55,7 +54,7 @@ class App extends React.Component {
     return (
       <>
         {/* ugly styled-components API; semantically confusing in React */}
-        <GlobalStyle/>
+        {/* <GlobalStyle/> */}
         <BrowserRouter>
           <>
             <Route path="/" exact render={props => <Landing auth={auth}/>} />
