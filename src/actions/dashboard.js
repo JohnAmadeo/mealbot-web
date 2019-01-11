@@ -20,7 +20,7 @@ export function fetchDashboardData(auth) {
       })
       .catch(err => dispatch({
         type: ADD_ERROR,
-        error: err,
+        error: `Failed to fetch dashboard data`,
       }))
   }
 }

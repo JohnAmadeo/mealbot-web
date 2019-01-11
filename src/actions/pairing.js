@@ -4,8 +4,6 @@ import moment from 'moment';
 import { ADD_ERROR } from './errors';
 import { url, apiConfig, faxios } from '../api';
 
-var l = console.log;
-
 const fpairs = [
   [
     {
@@ -74,7 +72,6 @@ export const SET_SELECTED_ROUND_PAIRS_ID = 'SET_SELECTED_ROUND_PAIRS_ID';
 
 export function addRound(auth, org, round) {
   return dispatch => {
-    console.log(round.format());
     let config = apiConfig(auth);
     config.params = {
       ...config.params,
@@ -83,10 +80,10 @@ export function addRound(auth, org, round) {
     };
     return axios.post(url('round'), {}, config)
     // return faxios.post()
-      .then(result => l(dispatch({
+      .then(result => dispatch({
         type: ADD_ROUND,
         round,
-      })))
+      }))
       .catch(err => dispatch({
         type: ADD_ERROR,
         error: 'Failed to add a new round',
@@ -104,11 +101,11 @@ export function changeRoundDate(auth, org, roundId, round) {
     };
     return axios.post(url('round'), {}, config)
     // return faxios.post()
-      .then(result => l(dispatch({
+      .then(result => dispatch({
         type: CHANGE_ROUND_DATE,
         roundId,
         round,
-      })))
+      }))
       .catch(err => dispatch({
         type: ADD_ERROR,
         error: `Failed to change the date of round ${roundId} to ${round}`,
@@ -126,7 +123,6 @@ export function fetchPairs(auth, org) {
 
     return axios.get(url('pairs'), config)
       .then(result => {
-        console.log(result);
         const roundPairs = result.data.roundPairs;
         dispatch({
           type: SET_PAIRS,
@@ -145,20 +141,16 @@ export function fetchPairs(auth, org) {
 export function fetchRounds(auth, org) {
   return dispatch => {
     let config = apiConfig(auth);
-    console.log(org);
     config.params = {
       ...config.params,
       org,
     };
 
     return axios.get(url('rounds'), config)
-      .then(result => {
-        console.log(result.data);
-        l(dispatch({
-          type: SET_ROUNDS,
-          rounds: result.data.rounds.map(round => moment(round)), 
-        }));
-      })
+      .then(result => dispatch({
+        type: SET_ROUNDS,
+        rounds: result.data.rounds.map(round => moment(round)), 
+      }))
       .catch(err => dispatch({
         type: ADD_ERROR,
         error: 'Failed to fetch rounds',
@@ -174,14 +166,12 @@ export function removeRound(auth, org, roundId) {
       roundId,
     };
 
-    console.log(config);
-
     return axios.delete(url('round'), config)
     // return faxios.delete()
-      .then(result => l(dispatch({
+      .then(result => dispatch({
         type: REMOVE_ROUND,
         roundId,
-      })))
+      }))
       .catch(err => dispatch({
         type: ADD_ERROR,
         error: `Failed to add remove the round ${roundId}`,

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ADD_ERROR } from './errors';
 
 import { apiConfig, url } from '../api';
-import { fetchRounds } from './pairing';
+import { fetchRounds, fetchPairs } from './pairing';
 import { fetchMembers } from './members';
 
 /*
@@ -79,19 +79,18 @@ export function createOrg(auth, org) {
 
 export function selectOrg(auth, org) {
   return dispatch => {
-    const config = apiConfig(auth);
-    config.params.org = org;
-
-    return axios.get(url('org'), config)
-      .then(result => {
-        const { members, traits, crossMatchTrait } = result.data;
-        dispatch({
-          type: SELECT_ORG,
-          org,
-          members,
-          traits,
-          crossMatchTrait,
-        });
-      });
+    return Promise.all([
+      dispatch(fetchMembers(auth, org)),
+      dispatch(fetchRounds(auth, org)),
+      dispatch(fetchPairs(auth, org)),
+      dispatch({
+        type: SELECT_ORG,
+        org,
+      })
+    ])
+    .catch(_ => dispatch({
+      type: ADD_ERROR,
+      error: `Failed to fetch data for the organization ${org}`,
+    }));
   }
 }

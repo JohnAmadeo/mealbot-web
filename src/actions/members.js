@@ -22,7 +22,6 @@ export function fetchMembers(auth, org) {
     return axios.get(url('members'), config)
       .then(result => {
         const { members, traits, crossMatchTrait } = result.data;
-        console.log(result.data);
         dispatch({
           type: SET_MEMBERS,
           members,
