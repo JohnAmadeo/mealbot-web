@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import 'react-dates/initialize';
@@ -10,6 +9,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
+import Card from './common/Card';
 import Header from './common/Header';
 
 class Rounds extends React.Component { 
@@ -73,6 +73,7 @@ class Rounds extends React.Component {
     return (
       <Container>
         <Header title="Round Schedule" />
+        <Card>Mealbot will automatically pair people and put them on an email thread the day a round is scheduled.</Card>
         {rounds.map((round, idx) =>
           <DateWrapper key={idx}>
             <SingleDatePicker
