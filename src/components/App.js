@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import Auth from '../auth/auth';
 import CrossMatchTraitContainer from '../containers/CrossMatchTraitContainer';
@@ -28,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
 
 class App extends React.Component {
   render() {
+    const orgs = this.props.orgs;
     const routes = [
       {
         component: <MembersContainer auth={auth} />,
@@ -63,16 +66,18 @@ class App extends React.Component {
                 key={idx}
                 path={`/${route.path}`}
                 exact
-                render={props =>
+                render={props => auth.isAuthenticated() ? (
                   <DashboardContainer
                     auth={auth}
                     routes={routes}
                     selectedRouteId={idx}
-                  >
+                    >
                     <ErrorListContainer />
-                    {route.component}
+                    {orgs.length > 0 ? route.component : <></>}
                   </DashboardContainer>
-                }
+                ) : (
+                  <Redirect to="/" />
+                )}
                 />
             ))}
             <Route 
@@ -86,6 +91,10 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  orgs: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 
 export default App;

@@ -11,12 +11,15 @@ export function fetchDashboardData(auth) {
   return (dispatch, getState) => {
     return dispatch(fetchOrgs(auth))
       .then(() => {
-        const org = getState().orgs.orgs[getState().orgs.selectedOrgId];
-        return Promise.all([
-          dispatch(fetchMembers(auth, org)),
-          dispatch(fetchRounds(auth, org)),
-          dispatch(fetchPairs(auth, org)),
-        ]);
+        const { orgs, selectedOrgId } = getState().orgs;
+        if (orgs.length > 0) {
+          const org = orgs[selectedOrgId];
+          return Promise.all([
+            dispatch(fetchMembers(auth, org)),
+            dispatch(fetchRounds(auth, org)),
+            dispatch(fetchPairs(auth, org)),
+          ]);
+        }
       })
       .catch(err => dispatch({
         type: ADD_ERROR,

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Card from './common/Card';
 import Chips from './common/Chips';
 import Header from './common/Header';
 import PairTable from './PairTable';
@@ -15,10 +15,10 @@ class Pairs extends React.Component {
       setSelectedRoundPairsId,
     } = this.props;
 
-    return this.props.auth.isAuthenticated() ? (
+    return (
       <StyledPairing>
         <Header title="Pairs"/>
-        {roundPairs.length > 0 &&
+        {roundPairs.length > 0 ? (
         <>
           <P>Round</P>
           <Chips
@@ -26,21 +26,18 @@ class Pairs extends React.Component {
             onClick={setSelectedRoundPairsId}
             selectedItemId={selectedRoundPairsId}
           />        
-        </>
-        }
-
-        {selectedRoundPairsId !== null && 
           <PairTable pairs={roundPairs[selectedRoundPairsId]} />
+        </>
+        ) : (
+        <Card>No pairs have been made yet.</Card>
+        )
         }
       </StyledPairing>
-    ) : (
-      <Redirect to='/' />
     );
   }
 } 
 
 Pairs.propTypes = {
-  auth: PropTypes.object.isRequired,
   roundPairs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
     member1: PropTypes.shape({
       name: PropTypes.string.isRequired,

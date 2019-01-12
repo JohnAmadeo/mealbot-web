@@ -36,16 +36,18 @@ class Dashboard extends React.Component {
               onChange={option => this.props.selectOrg(option.value)}
               options={options}
               value={options[selectedOrgId]}
-            />
+              />
 
             <OrganizationSelect
               createOrg={createOrg}
-            />
+              />
 
+            {orgs.length > 0 && 
             <Navbar
               routes={routes}
               selectedRouteId={selectedRouteId}
-            />
+              />
+            }
 
             <LogOutButton
               onClick={() => {

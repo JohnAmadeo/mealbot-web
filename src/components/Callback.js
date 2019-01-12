@@ -26,9 +26,12 @@ class Callback extends React.Component {
         .then(result => this.setState({
           authState: AUTH_STATE.AUTHENTICATED,
         }))
-        .catch(err => this.setState({
-          authState: AUTH_STATE.ERROR,
-        }));
+        .catch(err => {
+          console.log(err);
+          this.setState({
+            authState: AUTH_STATE.ERROR,
+          });
+        });
     }
   }
 

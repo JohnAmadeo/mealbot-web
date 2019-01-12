@@ -70,7 +70,7 @@ class Rounds extends React.Component {
 
     const today = moment();
 
-    return this.props.auth.isAuthenticated() ? (
+    return (
       <Container>
         <Header title="Round Schedule" />
         {rounds.map((round, idx) =>
@@ -110,8 +110,6 @@ class Rounds extends React.Component {
           />
         </DateWrapper>
       </Container>
-    ) : (
-      <Redirect to='/' />
     );
   }
 };

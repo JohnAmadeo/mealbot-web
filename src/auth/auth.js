@@ -11,7 +11,6 @@ export default class Auth {
       redirectUri: 'https://mealbot-web.herokuapp.com/callback',
       responseType: 'token id_token',
       scope: 'openid profile email',
-      // audience: 'https://mealbot.auth0.com',
     });
     this.accessToken = localStorage.getItem('accessToken');
     this.idToken = localStorage.getItem('idToken');

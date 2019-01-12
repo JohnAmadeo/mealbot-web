@@ -1,7 +1,6 @@
 // eslint-disable-next-line
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Card from './common/Card';
@@ -9,15 +8,20 @@ import Chips from './common/Chips';
 import Header from './common/Header';
 
 const CrossMatchTrait = ({ 
-  auth,
   crossMatchTraitId,
   members, 
   traits,
   setCrossMatchTrait,
-}) => auth.isAuthenticated() ? (
+}) => (
   <Container>
     <Header title={"Cross Match Trait"} />
-    {traits.length > 0 ? (
+    {members.length === 0 ? (
+    <Card>Your organization does not have any members yet.</Card>
+    ) : traits.length === 0 ? (
+    <Card>
+      Your members do not have any traits (i.e CSV columns that aren't 'Name' or 'Email'). Go to the Members tab to see a sample CSV that has traits.
+    </Card>
+    ) : (
     <>
       <Card>
         Select a trait, and Mealbot will try to match people up with different values for that trait. For example, you can match up people from different years.
@@ -26,20 +30,13 @@ const CrossMatchTrait = ({
         items={traits}
         onClick={setCrossMatchTrait}
         selectedItemId={crossMatchTraitId}
-      />
+        />
     </>
-    ) : (
-    <Card>
-      Your members do not have any traits (i.e CSV columns that aren't 'Name' or 'Email'). Go to the Members tab to see a sample CSV that has traits.
-    </Card>
     )}
   </Container>
-) : (
-  <Redirect to='/' />
 );
 
 CrossMatchTrait.propTypes = {
-  auth: PropTypes.object.isRequired,
   crossMatchTraitId: PropTypes.number,
   members: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,

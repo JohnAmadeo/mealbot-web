@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 // import './index.css';
-import App from './components/App';
+import AppContainer from './containers/AppContainer';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './reducers/index';
 
@@ -18,7 +18,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>,
   document.getElementById('root'),
 );

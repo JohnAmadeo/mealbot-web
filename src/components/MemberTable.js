@@ -51,7 +51,7 @@ const TableContainer = styled.div`
   border-bottom: 2px solid whitesmoke;
   border-top: 2px solid whitesmoke;
   display: inline-block;
-  height: 600px;
+  max-height: 600px;
   margin: 24px 0px 12px 0px;
   overflow-y: scroll;
   width: 100%;

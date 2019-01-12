@@ -44,7 +44,6 @@ export function uploadMembers(auth, org, csv) {
     // Do we need to set the Content-Type to form/multipart
     return axios.post(url('members'), formData, config)
       .then(result => {
-        console.log(result);
         dispatch({ 
           type: SET_MEMBERS, 
           members: result.data.members, 
@@ -52,11 +51,13 @@ export function uploadMembers(auth, org, csv) {
           crossMatchTraitId: null, 
         });
       })
-      .catch(err => dispatch({
+      .catch(err => {
+        console.log(err);
+        dispatch({
         type: ADD_ERROR,
         // TODO: use error message from server to make message more descriptive
         error: 'Could not upload CSV of members',
-      }));
+      })});
   };
 }
 

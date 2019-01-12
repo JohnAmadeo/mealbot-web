@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-import { Redirect } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import Card from './common/Card';
@@ -9,13 +8,10 @@ import Header from './common/Header';
 import MembersTable from './MemberTable';
 
 const Members = ({ 
-  auth,
-  crossMatchTraitId,
   members, 
   onUploadMembersCSV,
-  setCrossMatchTrait,
   traits, 
-}) => auth.isAuthenticated() ? (
+}) => (
   <StyledMembers>
     <Header title={"Members"} />
     {members.length > 0 &&
@@ -45,12 +41,9 @@ const Members = ({
       )}
     </Dropzone>
   </StyledMembers>
-) : (
-  <Redirect to='/' />
 );
 
 Members.propTypes = {
-  auth: PropTypes.object.isRequired,
   crossMatchTraitId: PropTypes.number,  
   members: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
