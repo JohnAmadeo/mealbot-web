@@ -15,9 +15,9 @@ export function fetchDashboardData(auth) {
         if (orgs.length > 0) {
           const org = orgs[selectedOrgId];
           return Promise.all([
-            dispatch(fetchMembers(auth, org)),
-            dispatch(fetchRounds(auth, org)),
-            dispatch(fetchPairs(auth, org)),
+            // dispatch(fetchMembers(auth, org)),
+            // dispatch(fetchRounds(auth, org)),
+            // dispatch(fetchPairs(auth, org)),
           ]);
         }
       })
