@@ -7,7 +7,7 @@ export default class Auth {
     this.auth0 = new auth0.WebAuth({
       domain: 'mealbot.auth0.com',
       clientID: 'waDxEb9pnY5v5aGPvcAlgT4vhd6tKIda',
-      // redirectUri: 'http://localhost:5000/callback',
+      // redirectUri: 'http://localhost:3000/callback',
       redirectUri: 'https://mealbot-web.herokuapp.com/callback',
       responseType: 'token id_token',
       scope: 'openid profile email',
