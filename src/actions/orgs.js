@@ -17,24 +17,6 @@ export const SELECT_ORG = 'SELECT_ORG';
  * action creators
  */
 
-export function fetchDashboardData(auth) {
-  return (dispatch, getState) => {
-    return dispatch(fetchOrgs(auth))
-      .then(() => {
-        const org = getState().orgs.org[getState().orgs.selectedOrgId];
-        return dispatch(fetchMembers(auth, org));
-      })
-      .then(() => {
-        const org = getState().orgs.org[getState().orgs.selectedOrgId];
-        return dispatch(fetchRounds(auth, org));
-      })
-      .catch(err => dispatch({
-        type: ADD_ERROR,
-        error: err,
-      }))
-  }
-}
-
 export function fetchOrgs(auth) {
   return dispatch => {
     return axios.get(url('orgs'), apiConfig(auth))
