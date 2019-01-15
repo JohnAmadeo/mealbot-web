@@ -14,7 +14,8 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     if (this.props.orgs.length === 0) {
-      this.props.fetchDashboardData(this.props.auth);
+      // this.props.fetchDashboardData(this.props.auth);
+      this.props.fetchOrgs();
     } 
   }
 
