@@ -69,6 +69,7 @@ export const SET_PAIRS = 'SET_PAIRS';
 export const SET_ROUNDS = 'SET_ROUNDS';
 export const SET_ROUND_FOCUS = 'SET_ROUND_FOCUS';
 export const SET_SELECTED_ROUND_PAIRS_ID = 'SET_SELECTED_ROUND_PAIRS_ID';
+export const RESET_PAIRING = 'RESET_PAIRING';
 
 export function addRound(auth, org, round) {
   return dispatch => {

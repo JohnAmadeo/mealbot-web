@@ -1,3 +1,5 @@
+import { REACT_APP_ENV } from './utils';
+
 export function apiConfig(auth) {
   return {
     headers: {
@@ -10,7 +12,9 @@ export function apiConfig(auth) {
 }
 
 export function url(route) {
-  // const baseUrl = 'http://localhost:8080/';
+  // const baseUrl = process.env.REACT_APP_ENV === REACT_APP_ENV.PROD ?
+  //   'https://mealbot-2.herokuapp.com/' :
+  //   'http://localhost:8080/';
   const baseUrl = 'https://mealbot-2.herokuapp.com/';
   return `${baseUrl}${route}`
 }

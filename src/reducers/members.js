@@ -1,4 +1,4 @@
-import { SET_MEMBERS, SET_CROSS_MATCH_TRAIT } from "../actions/members";
+import { SET_MEMBERS, SET_CROSS_MATCH_TRAIT, RESET_MEMBERS } from "../actions/members";
 import { CREATE_ORG } from "../actions/orgs";
 
 const initialState = {
@@ -28,6 +28,8 @@ export default function members(state = initialState, action) {
         ...state,
         crossMatchTraitId: state.traits.indexOf(action.crossMatchTrait),
       };
+    case RESET_MEMBERS:
+      return initialState;
     default:
       return state;
   }

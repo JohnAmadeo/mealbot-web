@@ -24,6 +24,11 @@ const PairTable = ({ pairs }) => (
             <td key={pair.member2.email}>
               {pair.member2.name}
             </td>
+            {pair.extraMember &&
+            <td key={pair.extraMember.email}>
+              {pair.extraMember.name}
+            </td>
+            }
           </tr>
         )}
       </tbody>
@@ -41,6 +46,10 @@ PairTable.propTypes = {
       name: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
     }),
+    extraMember: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+    }),
   })).isRequired,
 }
 
@@ -48,9 +57,7 @@ const TableContainer = styled.div`
   border-bottom: 2px solid whitesmoke;
   border-top: 2px solid whitesmoke;
   display: inline-block;
-  height: 600px;
   margin: 24px 0px 12px 0px;
-  overflow-y: scroll;
   width: 100%;
 `;
 

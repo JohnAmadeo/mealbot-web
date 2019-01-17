@@ -9,6 +9,7 @@ import axios from 'axios';
 export const SET_MEMBERS = 'SET_MEMBERS';
 export const SET_TRAITS = 'SET_TRAITS';
 export const SET_CROSS_MATCH_TRAIT = 'SET_CROSS_MATCH_TRAIT';
+export const RESET_MEMBERS = 'RESET_MEMBERS';
 
 /*
  * action creators

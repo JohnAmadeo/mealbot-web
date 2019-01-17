@@ -2,8 +2,8 @@ import axios from 'axios';
 import { ADD_ERROR } from './errors';
 
 import { apiConfig, url } from '../api';
-import { fetchRounds, fetchPairs } from './pairing';
-import { fetchMembers } from './members';
+import { fetchRounds, fetchPairs, RESET_PAIRING } from './pairing';
+import { fetchMembers, RESET_MEMBERS } from './members';
 
 /*
  * action types
@@ -45,10 +45,11 @@ export function fetchOrgs(auth) {
 export function createOrg(auth, org) {
   return dispatch => {
     return axios.post(url('org'), { org }, apiConfig(auth))
-      .then(result => dispatch({
-        type: CREATE_ORG,
-        org,
-      }))
+      .then(result => Promise.all([
+        dispatch({ type: CREATE_ORG, org }),
+        dispatch({ type: RESET_MEMBERS }),
+        dispatch({ type: RESET_PAIRING }),
+      ]))
       .catch(err => {
         dispatch({
           type: ADD_ERROR,

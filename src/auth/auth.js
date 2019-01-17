@@ -2,13 +2,18 @@ import auth0 from 'auth0-js';
 import history from './history';
 import jwtDecode from 'jwt-decode';
 
+import { REACT_APP_ENV } from '../utils';
+
 export default class Auth {
   constructor() {
+    const redirectUri = process.env.REACT_APP_ENV === REACT_APP_ENV.PROD ?
+      'https://mealbot-web.herokuapp.com/callback' :
+      'http://localhost:3000/callback';
+      
     this.auth0 = new auth0.WebAuth({
       domain: 'mealbot.auth0.com',
       clientID: 'waDxEb9pnY5v5aGPvcAlgT4vhd6tKIda',
-      // redirectUri: 'http://localhost:3000/callback',
-      redirectUri: 'https://mealbot-web.herokuapp.com/callback',
+      redirectUri, 
       responseType: 'token id_token',
       scope: 'openid profile email',
     });

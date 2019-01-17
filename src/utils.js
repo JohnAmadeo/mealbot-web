@@ -14,3 +14,8 @@ export const fn = {
 export const display = {
   capitalize: str => str[0].toUpperCase() + str.slice(1)
 }
+
+export const REACT_APP_ENV = {
+  DEV: 'DEV',
+  PROD: 'PROD',
+}

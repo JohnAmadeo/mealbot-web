@@ -5,7 +5,8 @@ import {
   SET_PAIRS, 
   SET_ROUNDS, 
   SET_ROUND_FOCUS,
-  SET_SELECTED_ROUND_PAIRS_ID
+  SET_SELECTED_ROUND_PAIRS_ID,
+  RESET_PAIRING,
 } from "../actions/pairing";
 import { fn } from '../utils';
 
@@ -61,6 +62,8 @@ export default function orgs(state = initialState, action) {
         ...state,
         selectedRoundPairsId: action.roundPairsId,
       }
+    case RESET_PAIRING:
+      return initialState;
     default:
       return state;
   }
