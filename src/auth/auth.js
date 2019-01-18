@@ -26,7 +26,6 @@ export default class Auth {
   handleAuthentication = () => {
     return new Promise((resolve, reject) => {
       this.auth0.parseHash((err, authResult) => {
-        console.log(authResult);
         if (!(authResult && authResult.accessToken && authResult.idToken)) {
           history.replace('/');
           return reject(err);
