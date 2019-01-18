@@ -21,11 +21,10 @@ const Members = ({
         <a href="https://mealbot-2.herokuapp.com/sample.csv" download>Download a sample CSV file that Mealbot accepts</a>
     </Card>
     <Dropzone
-      accept="text/csv"
       multiple={false}
-      onDrop={(acceptedFiles, rejectedFiles) => {
-        if (acceptedFiles.length === 1) {
-          onUploadMembersCSV(acceptedFiles[0]);
+      onDrop={files => {
+        if (files.length === 1 && files[0].name.endsWith('.csv')) {
+          onUploadMembersCSV(files[0]);
         }
       }}
     >
