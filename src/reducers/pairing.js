@@ -39,7 +39,8 @@ export default function orgs(state = initialState, action) {
     case SET_PAIRS:
       return {
         ...state,
-        roundPairs: action.roundPairs,
+        roundPairs: action.roundPairs.map(pairs => 
+          pairs.sort((a, b) => a.member1.name < b.member1.name)),
         selectedRoundPairsId: action.selectedRoundPairsId,
       };
     case SET_ROUNDS:

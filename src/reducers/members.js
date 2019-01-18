@@ -19,7 +19,7 @@ export default function members(state = initialState, action) {
     case SET_MEMBERS:
       return {
         ...state,
-        members: action.members,
+        members: action.members.sort((a, b) => a.name < b.name),
         traits: action.traits,
         crossMatchTraitId: action.crossMatchTraitId,
       };
