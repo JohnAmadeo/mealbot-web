@@ -73,7 +73,7 @@ class Rounds extends React.Component {
     return (
       <Container>
         <Header title="Round Schedule" />
-        <Card>Mealbot will automatically pair people and put them on an email thread the day a round is scheduled.</Card>
+        <Card>Mealbot will automatically pair your members and send them an email at noon on the day you've scheduled a round.</Card>
         {rounds.map((round, idx) =>
           <DateWrapper key={idx}>
             <SingleDatePicker
