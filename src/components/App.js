@@ -25,20 +25,20 @@ class App extends React.Component {
         title: 'Members',
       },
       {
+        component: <RoundsContainer auth={auth} />,
+        path: 'rounds',
+        title: 'Schedule',
+      },
+      {
         component: <PairsContainer auth={auth} />,
         path: 'pairs',
-        title: 'Pairs',
+        title: 'Past Pairings',
       },
       {
         component: <CrossMatchTraitContainer auth={auth} />,
         path: 'crossmatchtrait',
         title: 'Cross Match Trait',
       },
-      {
-        component: <RoundsContainer auth={auth} />,
-        path: 'rounds',
-        title: 'Rounds',        
-      }
     ];
 
     return (
