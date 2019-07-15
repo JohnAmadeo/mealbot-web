@@ -42,8 +42,4 @@ const StyledErrorList = styled.div`
   `}
 `;
 
-const ErrorContainer = styled.div`
-  margin: 14px 0px;
-`;
-
 export default ErrorList;

@@ -2,55 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import { ADD_ERROR } from './errors';
-import { url, apiConfig, faxios } from '../api';
-
-const fpairs = [
-  [
-    {
-      member1: {
-        name: 'John',
-        email: 'jadk157@gmail.com',
-      },
-      member2: {
-        name: 'Amanda',
-        email: 'amanda@gmail.com',
-      },
-    },
-    {
-      member1: {
-        name: 'Darren',
-        email: 'darren172@gmail.com',
-      },
-      member2: {
-        name: 'Kailey',
-        email: 'kailey091@gmail.com',
-      },
-    },
-  ],
-  [
-    {
-      member1: {
-        name: 'John',
-        email: 'jadk157@gmail.com',
-      },
-      member2: {
-        name: 'Kailey',
-        email: 'kailey091@gmail.com',
-      },
-    },
-    {
-      member1: {
-        name: 'Darren',
-        email: 'darren172@gmail.com',
-      },
-      member2: {
-        name: 'Amanda',
-        email: 'amanda@gmail.com',
-      },
-
-    },
-  ] 
-];
+import { url, apiConfig } from '../api';
 
 function toUTCDateString(date) {
   const d = date.clone();

@@ -1,5 +1,4 @@
 import { ADD_ERROR, REMOVE_ERROR } from "../actions/errors";
-import { fn } from '../utils';
 
 export default function errors(state = [], action) {
   switch (action.type) {

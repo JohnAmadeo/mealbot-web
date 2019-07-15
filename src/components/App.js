@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
@@ -15,18 +14,6 @@ import RoundsContainer from '../containers/RoundsContainer';
 import ErrorListContainer from '../containers/ErrorListContainer';
 
 const auth = new Auth();
-const GlobalStyle = createGlobalStyle`
-  body {
-    @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900');
-    margin: 0;
-  }
-
-  * {
-    box-sizing: border-box;
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-  }
-`;
 
 class App extends React.Component {
   render() {
@@ -56,8 +43,6 @@ class App extends React.Component {
 
     return (
       <>
-        {/* ugly styled-components API; semantically confusing in React */}
-        {/* <GlobalStyle/> */}
         <BrowserRouter>
           <>
             <Route path="/" exact render={props => <Landing auth={auth}/>} />
