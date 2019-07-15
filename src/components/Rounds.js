@@ -72,33 +72,44 @@ class Rounds extends React.Component {
 
     return (
       <Container>
-        <Header title="Round Schedule" />
-        <Card>Mealbot will automatically pair your members and send them an email at noon on the day you've scheduled a round.</Card>
-        {rounds.map((round, idx) =>
-          <DateWrapper key={idx}>
-            <SingleDatePicker
-              disabled={round.isSameOrBefore(today)}
-              date={round}
-              onDateChange={date => changeRoundDate(idx, date)}
-              focused={isRoundFocused[idx]}
-              onFocusChange={({ focused }) =>
-                setRoundFocus(focused, idx)
-              }
-              id={`${idx}`}
-              isOutsideRange={day =>
-                this.isRoundOutsideRange(day, idx)
-              }
+        <Header title="Schedule" />
+        <Card>
+          <ul>
+            <li>
+              Mealbot will automatically pair your members and send them an email at noon on the day you've scheduled a round of meals.
+            </li>
+            <li>
+              If you have an odd number of members, one member will be randomly left out (i.e not matched with anyone) each round of meals.
+            </li>
+          </ul>
+        </Card>
+        {rounds.map((round, idx) => {
+          const isRoundOver = round.isSameOrBefore(today);
+          console.log(idx, isRoundOver);
+          return (
+            <DateWrapper key={idx} isRoundOver={isRoundOver} hasDate>
+              <SingleDatePicker
+                disabled={isRoundOver}
+                date={round}
+                onDateChange={date => changeRoundDate(idx, date)}
+                focused={isRoundFocused[idx]}
+                onFocusChange={({ focused }) =>
+                  setRoundFocus(focused, idx)
+                }
+                id={`${idx}`}
+                isOutsideRange={day =>
+                  this.isRoundOutsideRange(day, idx)
+                }
               />
-            {!round.isSameOrBefore(today) &&
-            <Button onClick={e => removeRound(idx)}>
-              x
-            </Button>
-            }
-          </DateWrapper>
-        )}
+              {!isRoundOver &&
+                <Button onClick={e => removeRound(idx)}> x </Button>
+              }
+            </DateWrapper>
+          )
+        })}
 
         <p>Add a new round</p>
-        <DateWrapper>
+        <DateWrapper isRoundOver={false} hasDate={false}>
           <SingleDatePicker
             date={this.state.newRound}
             onDateChange={addRound}
@@ -121,7 +132,6 @@ const Button = styled.button`
   color: white;
   font-size: 14px;
   height: 38px;
-  margin: 0px 12px;
   width: 38px;
 
   &:hover {
@@ -142,6 +152,14 @@ const Container = styled.div`
 // TODO: Find a less hacky way to style Airbnb's SingleDatePicker component
 // using styled-components
 const DateWrapper = styled.div`
+  background: ${props => props.isRoundOver ? 'whitesmoke' : 'white'};
+  ${props => props.hasDate ?
+    'border-left: 4px solid midnightblue' :
+    'border-bottom: 2px solid midnightblue'  
+  }
+
+  display: flex;
+
   input {
     height: 38px;
   }
@@ -152,10 +170,17 @@ const DateWrapper = styled.div`
   }
 
   .DateInput_input__focused {
-    border-bottom: 2px solid midnightblue;
+    border-bottom: 0px solid royalblue;
   }
 
+  .SingleDatePickerInput__withBorder {
+    border: 0;
+  }
+
+  justify-content: space-between;
   margin: 12px 0px;
+
+  width: 100%;
 `;
 
 Rounds.propTypes = {
