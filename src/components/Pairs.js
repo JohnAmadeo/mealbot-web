@@ -17,7 +17,7 @@ class Pairs extends React.Component {
 
     return (
       <StyledPairing>
-        <Header title="Pairs"/>
+        <Header title="Pairings"/>
         {roundPairs.length > 0 ? (
         <>
           <P>Round</P>
