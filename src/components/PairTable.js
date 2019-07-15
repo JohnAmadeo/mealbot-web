@@ -24,7 +24,7 @@ const PairTable = ({ pairs }) => (
             <td key={pair.member2.email}>
               {pair.member2.name}
             </td>
-            {pair.extraMember &&
+            {pair.extraMember.email !== '' &&
             <td key={pair.extraMember.email}>
               {pair.extraMember.name}
             </td>
