@@ -73,6 +73,15 @@ const StyledCard = styled.div`
       color: crimson;
     `}
   }
+
+  ul {
+    margin: 0;
+    padding: 0 0 0 24px;
+  }
+
+  li {
+    padding: 4px 0;
+  }
 `;
 
 Card.propTypes = {
