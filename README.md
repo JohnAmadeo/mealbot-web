@@ -1,3 +1,9 @@
+# Getting Started
+- Check api.js to decide which DB to connect to
+- Run 'npm start'
+
+# Create React App Instructions
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
