@@ -1,7 +1,7 @@
 # Intro (for people new to Javascript / React)
-- [Learn Javascript] (https://javascript.info/)
-- [Introduction to React] (https://reactjs.org/tutorial/tutorial.html)
-- Download NPM [here] (https://www.npmjs.com/get-npm). NPM is the piece of software that lets developers download Javascript libraries/modules/packages 
+- [Learn Javascript](https://javascript.info/)
+- [Introduction to React](https://reactjs.org/tutorial/tutorial.html)
+- Download NPM [here](https://www.npmjs.com/get-npm). NPM is the piece of software that lets developers download Javascript libraries/modules/packages 
 - If curious, this project was setup with [Create React App](https://github.com/facebook/create-react-app).
 
 # Getting Started
